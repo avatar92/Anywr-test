@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const authRoutes = require('./controllers/auth');
+
 const app = express();
 
 
@@ -15,6 +17,8 @@ app.use((req,res,next)=>{
     res.header('Access-Control-Allow-Headers','content-type, Authorisation');
     next();
 });
+
+app.use('/auth',authRoutes);
 
 
 mongoose.connect(process.env.CONNECTION_STRING).then((res)=>{
