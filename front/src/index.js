@@ -1,12 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {Provider} from 'react-redux';
+import jwt_decode from 'jwt-decode';
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-import {Provider} from 'react-redux';
-
 import store from './services/store';
+import * as t from './services/reducers/user/types';
+import AnwyrTest from './services/utils/axios';
+
+
+if(localStorage['anwyr_test_user']){
+  const token = localStorage.getItem('anwyr_test_user');
+  const decoded = jwt_decode(token);
+  const now = Date.now() / 1000;
+  let user = {};
+  if(now - decoded.iat > decoded.exp - decoded.iat){
+    user = {};
+  }else{
+    AnwyrTest.defaults.headers['Authorization'] = `Bearer ${token}`;
+    user = {
+      username: decoded.username,
+      email: decoded.email,
+    }
+  }
+
+  store.dispatch({
+    type: t.SET_USER,
+    payload: user,
+  });
+
+}
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
