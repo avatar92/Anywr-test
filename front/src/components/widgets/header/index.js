@@ -22,20 +22,20 @@ function NavigationBar({ user = {} }) {
                 <Nav className="me-auto">
                     {
                         isEmpty(user) && <>
-                            <Link to="/">
-                                <Nav.Link>Sign in</Nav.Link>
+                            <Link to="/" className='nav-link'>
+                                Sign in
                             </Link>
 
-                            <Link to="/sign-up">
-                                <Nav.Link>Sign up</Nav.Link>
+                            <Link to="/sign-up" className='nav-link'>
+                                Sign up
                             </Link>
 
                         </>
                     }
                     {
                         !isEmpty(user) && <>
-                            <Link to="/profile">
-                                <Nav.Link>Profile</Nav.Link>
+                            <Link to="/profile" className='nav-link'>
+                                Profile
                             </Link>
                             
                             <Nav.Link onClick={handleClick}>Sign out</Nav.Link>
