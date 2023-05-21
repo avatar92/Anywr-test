@@ -7,6 +7,7 @@ import Public from './components/public';
 
 import NavigationBar from './components/widgets/header';
 import AppLayout from './layout/app-laoyut';
+import Dashboard from './pages/dashboard';
 import Home from './pages/home';
 import Profile from './pages/profile';
 import SignUp from './pages/signup';
@@ -31,6 +32,10 @@ const router = createBrowserRouter(
       path: "/dashboard",
       element: <Protected> <AppLayout /> </Protected>,
       children: [
+        {
+          element: <Dashboard />,
+          path: ""
+        },
         {
           element: <Profile />,
           path: "profile",
