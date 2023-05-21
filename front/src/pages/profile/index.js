@@ -17,6 +17,9 @@ const Profile = ({ setUser }) => {
             if (err.response) {
                 const { data, status, headers } = err.response;
                 if (status === 401) {
+                    if(localStorage['anwyr_test_user']){
+                        localStorage.removeItem('anwyr_test_user');
+                    }
                     setUser({})
                 }
                 setLoading(false);
