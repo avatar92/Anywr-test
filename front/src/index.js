@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import jwt_decode from 'jwt-decode';
 
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './services/store';
