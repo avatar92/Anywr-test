@@ -24,6 +24,7 @@ const Home = ({setUser}) => {
     const [loading, setLoading] = useState(false);
 
     const handleOnsubmit = event => {
+        
         const form = event.currentTarget;
         const { username, password } = validateForm();
         if (form.checkValidity() === false) {
@@ -32,6 +33,7 @@ const Home = ({setUser}) => {
             return;
         }
         event.preventDefault();
+        setLoading(true);
         AnwyrTest.post('/auth/login', {
             username: username,
             password: password,
@@ -41,7 +43,7 @@ const Home = ({setUser}) => {
             const decoded = jwtDecode(token);
             setAuth(token);
             localStorage.setItem('anwyr_test_user',token)
-            console.log(decoded);
+            setLoading(false);
             setUser({
                 username: decoded.username,
                 email: decoded.email,
@@ -58,6 +60,7 @@ const Home = ({setUser}) => {
                     resErr.password = "Wrong credentials";
                 }
                 setError(resErr);
+                setLoading(false);
             }
         })
     }
