@@ -13,11 +13,6 @@ module.exports = (req, res, next) => {
     
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
 
-    // email: 'adelbensalem1992@gmail.com',
-    //   userId: '64691cfd2001354cdc591c82',
-    //   iat: 1684628452,
-    //   exp: 1684632052
-    // console.log(decodedToken.exp - decodedToken.iat);
     const now = Date.now() / 1000;
     
     if (!decodedToken) {
