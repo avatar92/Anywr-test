@@ -6,12 +6,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import isEmpty from '../../../services/utils/isEmpty';
+import { setUser } from '../../../services/reducers/user/actions';
+import setAuth from '../../../services/utils/setAuthorization';
 
-
-function NavigationBar({ user = {} }) {
+function NavigationBar({ user = {},setUser }) {
     const handleClick = e => {
         e.preventDefault();
-        console.log('logout');
+        localStorage.removeItem('anwyr_test_user');
+        setAuth(null);
+        setUser({});
     }
     return (
         <Navbar bg="dark" variant="dark">
@@ -37,7 +40,7 @@ function NavigationBar({ user = {} }) {
                             <Link to="/dashboard/profile" className='nav-link'>
                                 Profile
                             </Link>
-                            
+
                             <Nav.Link onClick={handleClick}>Sign out</Nav.Link>
                         </>
                     }
@@ -50,10 +53,11 @@ function NavigationBar({ user = {} }) {
 
 NavigationBar.propTypes = {
     user: PropTypes.object.isRequired,
+    setUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     user: state.user,
 })
 
-export default connect(mapStateToProps, {})(NavigationBar);
+export default connect(mapStateToProps, { setUser })(NavigationBar);
