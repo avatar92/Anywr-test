@@ -34,6 +34,15 @@ router.post('/sign-up', [
         .isEmpty()
 ], authController.signUp)
 
-router.post('/login', authController.login);
+router.post('/login', [
+    body('username')
+        .trim()
+        .not()
+        .isEmpty(),
+    body('password')
+        .trim()
+        .isLength({ min: 5 })
+        .withMessage('Password must be at elast 5 characters'),
+], authController.login);
 
 module.exports = router;
