@@ -34,7 +34,7 @@ function NavigationBar({ user = {} }) {
                     }
                     {
                         !isEmpty(user) && <>
-                            <Link to="/profile" className='nav-link'>
+                            <Link to="/dashboard/profile" className='nav-link'>
                                 Profile
                             </Link>
                             
