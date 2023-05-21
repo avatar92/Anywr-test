@@ -4,11 +4,16 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
+import jwtDecode from 'jwt-decode';
+import PropTypes from 'prop-types';
 
 import AnwyrTest from '../../services/utils/axios';
 import isEmpty from '../../services/utils/isEmpty';
+import {setUser} from '../../services/reducers/user/actions'
+import { connect } from 'react-redux';
+import setAuth from '../../services/utils/setAuthorization';
 
-const Home = () => {
+const Home = ({setUser}) => {
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
     const [validated, setValidated] = useState(false);
@@ -32,7 +37,15 @@ const Home = () => {
             password: password,
         }).then(res => {
             const { data } = res;
-            console.log(data);
+            const token = data.token;
+            const decoded = jwtDecode(token);
+            setAuth(token);
+            localStorage.setItem('anwyr_test_user',token)
+            console.log(decoded);
+            setUser({
+                username: decoded.username,
+                email: decoded.email,
+            })
         }).catch(err => {            
             if (err.response) {
                 const {data,status,headers} = err.response;
@@ -109,4 +122,10 @@ const Home = () => {
     </div>
 }
 
-export default Home;
+Home.propTypes = {
+    setUser: PropTypes.func.isRequired
+}
+
+export default connect(null,{
+    setUser
+}) (Home);

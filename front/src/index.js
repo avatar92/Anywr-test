@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import store from './services/store';
 import * as t from './services/reducers/user/types';
 import AnwyrTest from './services/utils/axios';
+import setAuth from './services/utils/setAuthorization';
 
 
 if(localStorage['anwyr_test_user']){
@@ -19,8 +20,9 @@ if(localStorage['anwyr_test_user']){
   let user = {};
   if(now - decoded.iat > decoded.exp - decoded.iat){
     user = {};
+    setAuth(null);
   }else{
-    AnwyrTest.defaults.headers['Authorization'] = `Bearer ${token}`;
+    setAuth(token);
     user = {
       username: decoded.username,
       email: decoded.email,
