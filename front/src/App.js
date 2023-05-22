@@ -5,7 +5,6 @@ import {
 import Protected from './components/protected';
 import Public from './components/public';
 
-import NavigationBar from './components/widgets/header';
 import AppLayout from './layout/app-laoyut';
 import Dashboard from './pages/dashboard';
 import Home from './pages/home';

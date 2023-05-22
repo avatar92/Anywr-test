@@ -9,7 +9,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './services/store';
 import * as t from './services/reducers/user/types';
-import AnwyrTest from './services/utils/axios';
 import setAuth from './services/utils/setAuthorization';
 
 
