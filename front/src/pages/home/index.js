@@ -85,15 +85,15 @@ const Home = ({setUser}) => {
             password: passwordRef.current.value
         }
     }
-    return <div className="container my-5">
-        <Form noValidate validated={validated} onSubmit={handleOnsubmit}>
+    return <div data-testid="home" className="container my-5">
+        <Form data-testid="form"  noValidate validated={validated} onSubmit={handleOnsubmit}>
             <Form.Group as={Row} className="mb-3" controlId='validationUsername'>
                 <Form.Label column sm="2">
                     UserName
                 </Form.Label>
                 <Col sm="10">
                     <InputGroup hasValidation>
-                        <Form.Control required isInvalid={!isEmpty(error.username) ? true : false} ref={usernameRef} type='text' placeholder='your username' />
+                        <Form.Control data-testid="username-input" required isInvalid={!isEmpty(error.username) ? true : false} ref={usernameRef} type='text' placeholder='your username' />
                         <Form.Control.Feedback type="invalid">
                             {error.username}
                         </Form.Control.Feedback>
@@ -108,7 +108,7 @@ const Home = ({setUser}) => {
                 </Form.Label>
                 <Col sm="10">
                     <InputGroup hasValidation>
-                        <Form.Control required isInvalid={!isEmpty(error.password) ? true : false} ref={passwordRef} type="password" placeholder="Password" />
+                        <Form.Control data-testid="password-input" required isInvalid={!isEmpty(error.password) ? true : false} ref={passwordRef} type="password" placeholder="Password" />
                         <Form.Control.Feedback type="invalid">
                             {error.password}
                         </Form.Control.Feedback>
@@ -116,7 +116,7 @@ const Home = ({setUser}) => {
                 </Col>
             </Form.Group>
             <div className='d-flex justify-content-end'>
-                <Button type="submit" variant="secondary" size="lg">
+                <Button data-testid="submit" type="submit" variant="secondary" size="lg">
                     {loading ? <>Loading...</> : <>Log in</>}
                 </Button>
             </div>
