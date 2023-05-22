@@ -26,9 +26,9 @@ const SignUp = () => {
 
     const handleOnsubmit = e => {
         const form = e.currentTarget;
-        const { username, password, email } = validateForm();
+        const { username, password, email,err } = validateForm();
 
-        if (form.checkValidity() === false) {
+        if (form.checkValidity() === false || err.confirmPassword || err.password || err.confirmPassword || err.email) {
             e.preventDefault();
             e.stopPropagation();
             return;
@@ -114,6 +114,7 @@ const SignUp = () => {
             username: usernameRef.current.value,
             password: passwordRef.current.value,
             email: emailRef.current.value,
+            err: error,
         }
     }
     return <div className="container my-5">
